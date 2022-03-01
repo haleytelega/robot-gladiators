@@ -24,8 +24,8 @@ var enemy = ["Roborto", "Amy Android", "Robo Trumble"];
 
 // creates function expression
 var fight = function (enemyName) {
-    // Alert players they are starting the round
-    window.alert("Welcome to Robot Gladiators!");
+    //repeat and execute as long as the enemy-robot is alive
+    while(enemyHealth > 0) {
 
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT or 'SKIP to choose.");
 
@@ -67,7 +67,7 @@ var fight = function (enemyName) {
     var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
     //if yes, leave fight
-    if (confiirmSkip) {
+    if (confirmSkip) {
         window.alert(playerName + " has decided to skip this fight. Goodbye!");
         playerMoney = playerMoney - 2;
     }
@@ -84,9 +84,12 @@ var fight = function (enemyName) {
     else {
         console.log("This will run instead.");
     }
-};
+}
+}
 
 // executes fight
 for(var i = 0; i <enemyName.length; i++) {
-    fight (enemyName[i]);
+    var pickedEnemyName = enemyName[i];
+    enemyHealth = 50;
+    fight (pickedEnemyName);
 }
