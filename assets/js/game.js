@@ -19,6 +19,12 @@ var enemyAttack = 12;
 
 var enemy = ["Roborto", "Amy Android", "Robo Trumble"];
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (40 - 60 + 1) + min);
+
+    return value;
+};
 
 // creates function expression
 var fight = function (enemyName) {
@@ -36,13 +42,16 @@ if (promptFight === "skip" || promptFight === "SKIP") {
 //if yes, leave fight
     if (confirmSkip) {
         window.alert(playerName + " has decided to skip this fight. Goodbye!");
-        playerMoney = playerMoney - 2;
+        playerMoney = Math.max(0, playerMoney - 10);
         console.log("playerMoney", playerMoney);
         break;
     }
 }
-//Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    enemyHealth = enemyHealth - playerAttack;
+ //generate random damage value based on player's attack power
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+
+    enemyHealth = Math.max(0, enemyHealth - damage);
+
     console.log(
         playerName + " attacked " + enemyName + "." + enemyName + " now has " + enemyHealth + " healh remaning. "
     );
@@ -55,8 +64,11 @@ if (promptFight === "skip" || promptFight === "SKIP") {
     else {
         window.alert(enemyName + " still has " + enemyHealth + " health left.");
     }
-    // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-    playerHealth = playerHealth - enemyAttack;
+    
+    //generate random damage value based on enemy's attack power
+    var damage = randomNumber(enemyAttack - 3, enemyAttack);
+
+    playerHealth = Math.max(0, playerHealth - damage);
 
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -110,7 +122,8 @@ for(var i = 0; i < enemyName.length; i++) {
         var pickedEnemyName = enemyName[i];
 
         //reset enemyHealth before starting new fight
-        enemyHealth = 50;
+       //enemyHealth = Math.floor(Math.random() * 21) + 40;
+        enemyHealth = randomNumber (40, 60);
 
     // use debugger to pause script from running and check what's going on at that moment in the code
     // debugger;
